@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="This is where your description goes">
+    	<meta name="keywords" content="one, two, three">
+		<title>Comparo</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="/public/style.css">
+	</head>
+	<body>
+		<h1>Comparo</h1>
+
+        
+
+		<section class="two">
+			<h2>Enter product link</h2>
+			<form action="/postURL" method="post">
+				<input type="text" placeholder="Product" name="url">
+				<input type="submit">
+			</form>
+		</section>
+
+        <div id="feed"></div>
+
+		<script>
+            const feedDisplay = document.querySelector('#feed')
+
+            console.log("hello world")
+
+            fetch('http://localhost:8000/results')
+            .then(response => {
+                console.log("hello world")
+                return response.json()
+            })
+            .then(data => {
+                data.forEach(article => {
+                    console.log(article)
+                    const articleItem = '<div>' + '<h3>' + article.title + '</h3>' + '<h4>' + article.price + '</h4>' + '</div>'
+                    feedDisplay.insertAdjacentHTML("beforeend", articleItem)
+                })
+            })
+            .catch(err => console.log(err))
+        </script>
+	</body>
+</html>
